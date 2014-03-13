@@ -21,7 +21,7 @@
 #ifndef _ATTITUDE_H
 #define _ATTITUDE_H
 
-struct att_struct {
+typedef struct _att_struct {
   //pitch estimates in radians, positive is pitch down (fly forward)
   float pitch_g;  //=sum(gx * dt)
   float pitch_a;  //=pitch(az,ax)
@@ -51,7 +51,7 @@ struct att_struct {
 	float gx;   // gyro value x-axis in [rad/sec] right turn, i.e. roll right is positive           
 	float gy;   // gyro value y-axis in [rad/sec] right turn, i.e. pirch down is positive                     
 	float gz;   // gyro value z-axis in [rad/sec] right turn, i.e. yaw left is positive 
-};
+} att_struct;
 
 int att_Init(att_struct *att);
 int att_Init(att_struct *att);

@@ -3,8 +3,7 @@
 
     Copyright (C) 2011 Hugo Perquin - http://blog.perquin.com
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
+    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
 
@@ -43,7 +42,7 @@ i2c interface
 Acceleration Sensor: 10bit resolution, range -2 to 2G 
 Temperature Sensor: 8bit, 0.5°C/lsb, range -30 to 97.5°C
 */
-struct nav_struct
+typedef struct _nav_struct
 {
 	u16 size;                // +0x00 Size of the following data (always 0x2C) 
 	u16 seq;                 // +0x02 Sequence number, increases every update 
@@ -74,10 +73,10 @@ struct nav_struct
 	float gz;   // gyro value z-axis in [rad/sec] right turn, i.e. yaw left is positive                           
 	float t;    // temperature in [C] 
 	float h;    // height above ground in [cm] 
-  char h_meas;// 1 if this is a new h measurement, 0 otherwise
+    char h_meas;// 1 if this is a new h measurement, 0 otherwise
 	float ta;   // temperature acc
 	float tg;   // temperature gyro  
-};
+} nav_struct;
 
 int nav_Init(nav_struct* nav);
 int nav_FlatTrim();

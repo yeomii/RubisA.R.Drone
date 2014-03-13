@@ -188,8 +188,9 @@ FF1 Delay 2 seconds after sending FFs
 
 	//configure motors
 	int retval=0;
+    int m;
 	u08 reply[256];
-	for(int m=0;m<4;m++) {
+	for(m=0;m<4;m++) {
 		gpio_set(68+m,-1);
 		motorboard_cmd(0xe0,reply,2);
 		if(reply[0]!=0xe0 || reply[1]!=0x00)

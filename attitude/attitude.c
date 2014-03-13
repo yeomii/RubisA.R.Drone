@@ -46,7 +46,8 @@ void lr_init(int n)
   lr_n=n;
   float sx=0;
   float sxx=0;
-  for(int i=0;i<n;i++) {
+  int i;
+  for(i=0;i<n;i++) {
     sx+=i;
     sxx+=i*i;
     lr_y[i]=0;
@@ -59,9 +60,10 @@ void lr_init(int n)
 float lr_slope(float y) {
   float sxy=0;
   float sy=0;
+  int i;
   lr_y[lr_off]=y;
   lr_off = (lr_off+1)%lr_n;
-  for(int i=0;i<lr_n;i++) {
+  for(i=0;i<lr_n;i++) {
     int ii=(i+lr_off)%lr_n;
     sy+=lr_y[ii];
     sxy+=lr_y[ii]*i;
@@ -74,8 +76,8 @@ float lr_slope(float y) {
 
 
 nav_struct nav;
-ars_Gyro1DKalman ars_roll; 
-ars_Gyro1DKalman ars_pitch; 
+struct ars_Gyro1DKalman ars_roll; 
+struct ars_Gyro1DKalman ars_pitch; 
 
 //roll angle from acc in radians
 float roll(float a_z, float a_y)

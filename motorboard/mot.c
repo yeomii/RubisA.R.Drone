@@ -33,13 +33,13 @@ const u16 mot_pwm_min=0x00;
 const u16 mot_pwm_max=0x1ff;
 
 //m0=Front Left m1=Front Right m3=Rear Right m4=Rear Left
-struct mot_struct
+typedef struct _mot_struct
 {
   float mot[4]; //motor speed setting. 0.0=min power, 1.0=full power
   u16 pwm[4];   //motor speed 0x00-0x1ff.  -- protected by mutex
   u08 led[4];   //led 0=off 1=red 2=green 3=orange -- protected by mutex
   u08 NeedToSendLedCmd;
-};
+} mot_struct;
 pthread_t mot_thread;
 pthread_mutex_t mot_mutex;
 mot_struct mot;
@@ -142,7 +142,9 @@ void mot_Run(float m0, float m1, float m2, float m3)
   
   //convert to pwm values, clipped at mot_pwm_min and mot_pwm_max
   float pwm[4];
-  for(int i=0;i<4;i++) {
+  int i;
+
+  for(i=0;i<4;i++) {
     if(mot.mot[i]<0.0) mot.mot[i]=0.0;
     if(mot.mot[i]>1.0) mot.mot[i]=1.0;
     pwm[i]=mot_pwm_min + mot.mot[i]*(mot_pwm_max-mot_pwm_min);
